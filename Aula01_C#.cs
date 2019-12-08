@@ -16,6 +16,7 @@ class Programa
 
     public static void Main(string[] args)
     {
+        //-------------------------------------------------------While-------------------------------------------------------------
         Console.Write("Digite um numero: ");
         int num = int.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
         
@@ -29,7 +30,7 @@ class Programa
 
         Console.WriteLine("Numero negativo");
 
-        //-------------------------------------------------------Problema Sem OO----------------------------------------------------------------
+        //-------------------------------------------------------Problema Sem OO--------------------------------------------------------
         double xA, xB, xC, yA, yB, yC, p, areaX, areaY;
         Console.WriteLine("Entre com as medidas do triangulo X: ");
         xA = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
@@ -65,7 +66,7 @@ class Programa
 
         foreach (int obj in vetor)
         {
-            Console.WriteLine(obj); //para cada int obj dentro do vetor faça... impressao de todos os obj dentro da coleçao
+            Console.WriteLine(obj); //para cada int obj dentro do vetor faca... impressao de todos os obj dentro da colecao
         }
 
         for (int i = 0; i < 5; i++)
@@ -125,7 +126,7 @@ class Programa
             Console.WriteLine("Programa finalizado");
         }
 
-        /*-----------------------------------------If-Else-------------------------------------------------*/
+        /*-------------------------------------------If-Else / Operacao Ternaria---------------------------------------*/
         int nota1, nota2, nota3, notaFinal;
 
         Console.Write("Digite a primeira nota do aluno: ");
@@ -137,8 +138,9 @@ class Programa
 
         notaFinal = nota1 + nota2 + nota3;
 
-            //condiçao ? resultado_caso_for_verdadeiro : resultado_caso_for_falso
-        (notaFinal < 60) ? Console.WriteLine("Aluno reprovado") : Console.WriteLine("Aluno aprovado");
+            //condicao ? resultado_caso_for_verdadeiro : resultado_caso_for_falso
+        string opTernaria = notaFinal < 60 ? "Aluno reprovado" : "Aluno aprovado";
+        Console.WriteLine(opTernaria);
 
         if (notaFinal < 60)
         {
@@ -148,16 +150,16 @@ class Programa
         {
             Console.WriteLine("Aluno aprovado");
         }
-        /*---------------------------------------------Cast-------------------------------------------*/
-        MesesAno maNat = MesesAno.Dezembro;
-        MesesAno maMar = (MesesAno)9;
+        /*-------------------------------------------Cast / Enum-----------------------------------------------*/
+        MesesAno maPessoa1 = MesesAno.Dezembro;
+        MesesAno maPessoa2 = (MesesAno) 9;
 
-        int maNathy = (int)MesesAno.Dezembro + 1;
-        int maMarc = (int)MesesAno.Outubro + 1;
+        int maFulano = (int) MesesAno.Dezembro + 1;
+        int maCiclano = (int) MesesAno.Outubro + 1;
 
-        Console.WriteLine(maNat + ", " + maNathy);
-        Console.WriteLine(maMar + ", " + maMarc);
-        /*--------------------------------------------------------------------------*/
+        Console.WriteLine(maPessoa1 + ", " + maFulano);
+        Console.WriteLine(maPessoa2 + ", " + maCiclano);
+        /*---------------------------------------------Funcoes----------------------------------------------*/
         double number1, number2;
 
         Console.WriteLine("Entre com dois numeros para soma e subtração:");
@@ -188,6 +190,6 @@ class Programa
         n1 = 0.5;
         n2 = 1.5;
         n3 = 5.6;
-        Console.WriteLine("n1={0}, n2={1}, n3={2}", n1, n2, n3);
+        Console.WriteLine("n1= {0} / n2= {1} / n3= {2}", n1, n2, n3);
     }
 }

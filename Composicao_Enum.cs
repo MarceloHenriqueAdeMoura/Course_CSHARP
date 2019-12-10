@@ -29,8 +29,13 @@ namespace Composicao_Enum
             Email = email;
             BirthDate = birthDate;
         }
-    }
 
+        public override string ToString()
+        {
+            return Name + " (" + BirthDate.ToString("dd/MM/YYYY HH:mm:ss") + ") - " + Email;
+        }
+    }
+    
     class Product
     {
         public string Name { get; set; }
@@ -67,6 +72,11 @@ namespace Composicao_Enum
         public double SubTotal()
         {
             return Quantity * Price;
+        }
+
+        public override string ToString()
+        {
+            return Product.Name + ", $" + Price.ToString("F2", CultureInfo.InvariantCulture) + ", Quantity: " + Quantity + ", SubTotal: $" + SubTotal().ToString("F2", CultureInfo.InvariantCulture);
         }
     }
 
@@ -113,33 +123,63 @@ namespace Composicao_Enum
         {
             StringBuilder builder = new StringBuilder();
 
-            builder.AppendLine("Order moment: ");
-            builder.Append(Moment.ToString("dd/MM/YYYY HH:mm:ss"));
-            builder.AppendLine("Order status: ");
-            builder.Append(Status);
-            builder.AppendLine("Client: ");
-            builder.Append(Client.Name);
-            builder.Append(" ");
-            builder.Append(Client.BirthDate.ToString("dd/MM/YYYY HH:mm:ss"));
-            builder.Append(" - ");
-            builder.Append(Client.Email);
-            builder.AppendLine("Order items:");
+            builder.AppendLine("Oder moment: " + Moment.ToString("dd/MM/YYYY HH:mm:ss"));
+            builder.AppendLine("Order status: " + Status);
+            builder.AppendLine("Client: " + Client);
+            builder.AppendLine("Order items: ");
 
-            foreach(Order obj in Items)
+            foreach(OrderItem obj in Items)
             {
-                builder.AppendLine(obj.Items);
+                builder.AppendLine(obj.ToString());
             }
 
-            builder.AppendLine(Total());
+            builder.AppendLine("Total price: " + Total().ToString("F2", CultureInfo.InvariantCulture));
 
             return builder.ToString();
-        }
-    }
+        }        
+    }        
+    
     class Program
     {
         static void Main(string[] args)
         {
-            
+            Console.WriteLine("Enter client data: ");
+            Console.Write("Name: ");
+            string name = Console.ReadLine();
+            Console.Write("Email: ");
+            string email = Console.ReadLine();
+            Console.Write("Birth date (DD/MM/YYYY): ");
+            DateTime birthDate = DateTime.Parse(Console.ReadLine());
+
+            Client client = new Client(name, email, birthDate);
+
+            Console.WriteLine("Enter order data: ");
+            Console.Write("Status: ");
+            OrderStatus status = (OrderStatus) Enum.Parse(typeof(OrderStatus), Console.ReadLine());
+
+            Order order = new Order(DateTime.Now, status, client);
+
+            Console.Write("How many items to this order? ");
+            int n = int.Parse(Console.ReadLine());
+
+            for(int i=0; i<n; i++)
+            {
+                Console.WriteLine("Enter #" + (i + 1) + " item data:");
+                Console.Write("Product name: ");
+                string nameProduct = Console.ReadLine();
+                Console.Write("Product price: ");
+                double priceProduct = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+
+                Product product = new Product(name, priceProduct);
+
+                Console.Write("Quantity: ");
+                int quantity = int.Parse(Console.ReadLine());
+                OrderItem item = new OrderItem(quantity, priceProduct, product);
+
+                order.AddItem(item);
+            }
+
+            Console.WriteLine("\nOrder Summary: " + order);            
         }
     }
 }

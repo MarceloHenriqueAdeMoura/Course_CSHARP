@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Linq_Lambda
+namespace Linq_Lambda_1
 {
     class Category
     {
